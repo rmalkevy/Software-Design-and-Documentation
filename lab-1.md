@@ -180,7 +180,7 @@ For the chosen variant, you must deliver:
 
 ---
 
-## 🔹 Variant 1 — Basic One-to-One Messaging
+## 🔹 Variant 1 — Basic One-to-One Messaging -> Do not do this variant!!! This is the example.
 **Focus:** basic system architecture
 
 **Requirements:**
@@ -322,3 +322,4 @@ but to **clearly explain your decisions and reasoning**.
 ## 🎓 Final Note
 If you can clearly explain your system with diagrams and decisions,
 you are already thinking like a professional software engineer.
+    
