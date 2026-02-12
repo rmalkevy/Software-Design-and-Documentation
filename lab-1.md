@@ -113,25 +113,21 @@ stateDiagram-v2
 
 ---
 
-## 📝 Part 4 — RFC (Request for Comments) (15%)
+## 📚 Part 4 — ADR (Architecture Decision Record) (25%)
 
 ### Task
-Write a **short RFC (up to 1 page)** on the topic:
-
-> Message delivery strategy for online and offline users
-
-### RFC Template
+Document **one architecture decision**.
 
 ```markdown
-# RFC: Message Delivery Strategy
+# ADR-001: Use Message Queue for Delivery
+
+## Status
+Accepted
 
 ## Context
 Users can be online or offline when messages are sent.
 
-## Problem
-Messages must not be lost and delivery status must be reliable.
-
-## Proposed Solution
+## Decision
 Use asynchronous delivery with a queue and client acknowledgements.
 
 ## Alternatives
@@ -145,28 +141,6 @@ Use asynchronous delivery with a queue and client acknowledgements.
 
 ---
 
-## 📚 Part 5 — ADR (Architecture Decision Record) (10%)
-
-### Task
-Document **one architecture decision**.
-
-```markdown
-# ADR-001: Use Message Queue for Delivery
-
-## Status
-Accepted
-
-## Decision
-Message delivery will be handled asynchronously using a queue.
-
-## Consequences
-- Messages survive client disconnects
-- Higher reliability
-- More infrastructure complexity
-```
-
----
-
 
 # 🧪 Laboratory Variants — Messenger System Design
 
@@ -176,7 +150,7 @@ For the chosen variant, you must deliver:
 - Component Diagram  
 - Sequence Diagram (one key scenario)  
 - State Diagram (one main entity)  
-- 1 RFC **or** 1 ADR  
+- 1 ADR  
 
 ---
 
