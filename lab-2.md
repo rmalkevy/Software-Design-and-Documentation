@@ -209,33 +209,23 @@ Acceptable formats:
 
 Students must be able to answer the following practical questions.
 
-### 1
-
-How does your system ensure that **messages are not lost**?
+1. How does your system ensure that **messages are not lost**?
 
 ---
 
-### 2
-
-What happens if the **recipient is offline**?
+2. What happens if the **recipient is offline**?
 
 ---
 
-### 3
-
-How are **messages uniquely identified** in your system?
+3. How are **messages uniquely identified** in your system?
 
 ---
 
-### 4
-
-What **errors** can occur when sending a message and how does your system handle them?
+4. What **errors** can occur when sending a message and how does your system handle them?
 
 ---
 
-### 5
-
-How would your system need to change to support **1 million users**?
+5. How would your system need to change to support **1 million users**?
 
 ---
 
