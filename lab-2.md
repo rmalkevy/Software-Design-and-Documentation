@@ -10,61 +10,62 @@ https://github.com/rmalkevy/Software-Design-and-Documentation/blob/main/lab-1.md
 
 # Goal
 
-The goal of this laboratory work is to **implement a working prototype of a messenger system** based on the design created in **Lab 1**.
+Implement a **working prototype of a messenger system** based on the design created in **Lab 1**.
 
 Students will:
-- continue working with the messenger domain designed earlier
-- implement a minimal but functional system
-- practice software structure, persistence, and testing
-- learn to test APIs using **Postman**
 
-The objective is **not to build a full production messenger**, but to demonstrate correct **software engineering practices**.
+- continue developing the messenger system designed previously
+- implement a minimal but functional system
+- practice code structure, persistence, and API testing
+- learn to test APIs using **Postman**
+- implement a basic **integration test**
+
+The goal is **not to build a production messenger**, but to demonstrate **good software engineering practices**.
 
 ---
 
 # Task
 
-Implement a **minimal messenger system** using one of the variants from Lab 1.
+Implement the **Minimal Reference Messenger Architecture** described below.
 
-Students may choose **any programming language**:
+Students may use any programming language:
 
 - TypeScript
 - Python
 - C#
 - Java
 
-The implementation must follow the design created previously (Component / Sequence / State diagrams), but adjustments are allowed if justified.
+Your implementation should follow the design created in Lab 1 (Component / Sequence / State diagrams), but reasonable adjustments are allowed.
 
 ---
 
-# Variant Selection
+# Difficulty Variants (Optional)
 
-Students must implement **one of the 10 messenger variants** from Lab 1.
+After implementing the **minimal architecture**, students may extend the system using **one of the 10 variants from Lab 1** (for additional complexity and higher evaluation).
 
-Examples of variants include:
+Examples:
 
-- Basic one‑to‑one messaging
-- Message status tracking
-- Offline message delivery
-- Group chat
-- Typing indicators
-- Message editing
-- File attachments
-- End‑to‑end encryption (conceptual)
-- Message search
-- Moderation system
+- message status tracking
+- offline message delivery
+- group chat
+- typing indicators
+- message editing
+- file attachments
+- end‑to‑end encryption (conceptual)
+- message search
+- moderation system
 
-Students are free to extend functionality beyond the minimum requirements.
+Variants **add features**, but the **minimal architecture remains mandatory**.
 
 ---
 
-# Mandatory Features
+# Mandatory Implementation Requirements
 
-Regardless of the chosen variant, **every implementation must include the following core elements**.
+Every solution must include the following.
 
 ## 1. Message Persistence
 
-Messages must be stored so that they are **not lost after the program stops**.
+Messages must be stored so they **are not lost after the program stops**.
 
 Possible options:
 
@@ -72,39 +73,35 @@ Possible options:
 - PostgreSQL
 - JSON / file storage
 
-Students must clearly explain **where and how messages are stored**.
-
 ---
 
 ## 2. Unique Identifiers
 
-Each message must contain at least:
+Each message must include at least:
 
 - `messageId`
 - `senderId`
 - `timestamp`
 
-This helps model real systems where entities must be uniquely identifiable.
-
 ---
 
 ## 3. Error Handling
 
-The system must properly handle common error cases, for example:
+The system must correctly handle basic error cases, such as:
 
 - user does not exist
 - empty message
-- failed message delivery
+- invalid conversation
 
-The program should return **clear responses or error messages**.
+Clear responses or error messages should be returned.
 
 ---
 
 ## 4. Modular Code Structure
 
-The project must be organized into logical modules or folders.
+The project must be organized into logical modules.
 
-Example structure:
+Example:
 
 ```
 /models
@@ -112,39 +109,38 @@ Example structure:
 /storage
 /api
 /main
+/tests
 ```
 
-The goal is to demonstrate **separation of responsibilities**.
+This demonstrates **separation of responsibilities**.
 
 ---
 
-## 5. Simple API or CLI Interface
+## 5. Simple Interaction Interface
 
-The system must expose a simple way to interact with it, for example:
+The system must provide a way to interact with it:
 
-- HTTP API
-- command line interface
-- simple console application
-- web application
+- HTTP API (recommended)
+- CLI
+- simple console program
 
-At minimum the system must support:
+Minimum functionality:
 
-- send message
-- read messages
-- list users
+- create users
+- send messages
+- read message history
 
 ---
 
 # API Testing with Postman
 
-Students should test their messenger using **Postman**.
-
-Postman allows sending HTTP requests to the system and inspecting responses.
+Students must test their system using **Postman**.
 
 Typical workflow:
 
-1. Start the messenger server
-2. Send a request in Postman
+1. Start the server
+2. Send requests using Postman
+3. Verify stored messages and responses
 
 Example request:
 
@@ -158,32 +154,68 @@ POST `/messages`
 }
 ```
 
-3. Verify response and stored messages
-
-Postman download:
-
+Postman download:  
 https://www.postman.com/
 
-Learning to test APIs with tools like Postman is an important **industry skill**.
+---
+
+# Postman Collection Requirement
+
+Students must include a **Postman Collection** in the repository.
+
+The collection should contain requests for at least:
+
+- creating users
+- sending a message
+- retrieving message history
+
+This helps demonstrate that the API works and allows easy testing by the instructor.
+
+Example file:
+
+```
+postman_collection.json
+```
+
+---
+
+# Integration Test Requirement
+
+The project must include **at least one integration test** that verifies a real system flow.
+
+Example scenario:
+
+1. Create user A
+2. Create user B
+3. Send a message from A to B
+4. Retrieve message history
+5. Verify that the message exists
+
+The test should interact with the **actual API or service layer**, not only individual functions.
+
+Possible tools:
+
+- Jest / Vitest (TypeScript)
+- PyTest (Python)
+- xUnit / NUnit (C#)
+- JUnit (Java)
 
 ---
 
 # Submission Requirements
 
-Students must submit:
+## 1. Git Repository
 
-### 1. Git Repository
+The project must be submitted as a **Git repository**.
 
-The project must be stored in a Git repository.
+Requirements:
 
-Minimum requirements:
-
-- clear commit messages
 - working code
+- clear commit messages
 
 ---
 
-### 2. README File
+## 2. README
 
 The repository must include a README containing:
 
@@ -194,11 +226,11 @@ The repository must include a README containing:
 
 ---
 
-### 3. Demonstration
+## 3. Demonstration
 
 Students must demonstrate that the system works.
 
-Acceptable formats:
+Possible formats:
 
 - live demo
 - screenshots of API testing in Postman
@@ -207,91 +239,35 @@ Acceptable formats:
 
 # Defense Questions
 
-Students must be able to answer the following practical questions.
+Students should be able to explain:
 
 1. How does your system ensure that **messages are not lost**?
-
----
-
 2. What happens if the **recipient is offline**?
+3. How are **messages uniquely identified**?
+4. What **errors** may occur when sending a message?
+5. How would your system change to support **1 million users**?
 
 ---
 
-3. How are **messages uniquely identified** in your system?
+# Minimal Reference Architecture
 
----
+The following architecture **must be implemented by all students**.
 
-4. What **errors** can occur when sending a message and how does your system handle them?
-
----
-
-5. How would your system need to change to support **1 million users**?
-
----
-
-# Best Practices (Important)
-
-The goal of this laboratory work is to practice **real software engineering**, not just coding.
-
-### Good practices
-
-- clear project structure
-- meaningful naming
-- small focused modules
-- clear API design
-
-### Things to avoid
-
-- putting all logic in one file
-- extremely long methods
-- copying code from examples without understanding it
-
----
-
-# Additional Advice
-
-In professional development:
-
-- code is stored in **Git**
-- systems are tested through **APIs**
-- architecture decisions matter more than syntax
-
-Focus on writing **simple, understandable, and well‑structured code**.
-
-A small system implemented correctly is much more valuable than a large system that does not work reliably.
-
----
-
-# Minimal Reference Architecture — Educational Messenger
-
-This document describes a **minimal reference architecture** for the messenger project used in Laboratory Work 2.
-
-The purpose of this reference is to help students understand **how a simple messenger system can be structured**.  
-It is **not a strict template** — students are free to adapt it according to their variant.
-
----
-
-# System Overview
-
-The minimal system contains three main parts:
-
-- Client (CLI / simple UI / Postman)
-- Backend API
-- Database
+### System Overview
 
 ```
-Client -> HTTP API -> Message Service -> Database
+Client → HTTP API → Message Service → Database
 ```
 
 The system should support:
 
-- creating users
+- user creation
 - sending messages
 - retrieving message history
 
 ---
 
-# Minimal Architecture
+# Architecture Diagram
 
 ```mermaid
 flowchart LR
@@ -305,28 +281,6 @@ Client --> API
 API --> Msg
 Msg --> DB
 ```
-
-Components:
-
-**Client**
-- command line program
-- Postman
-- simple frontend
-
-**HTTP API**
-- handles incoming requests
-- validates input
-
-**Message Service**
-- contains business logic
-- creates and stores messages
-
-**Database**
-- stores users
-- stores conversations
-- stores messages
-
-SQLite is perfectly acceptable for this project.
 
 ---
 
@@ -362,19 +316,15 @@ text
 createdAt
 ```
 
-This structure is sufficient for a basic messenger.
-
 ---
 
 # Minimal API
 
-The following endpoints are recommended.
+Recommended endpoints.
 
-## Create user
+### Create user
 
 POST `/users`
-
-Example body:
 
 ```
 {
@@ -382,13 +332,9 @@ Example body:
 }
 ```
 
----
-
-## Send message
+### Send message
 
 POST `/messages`
-
-Example body:
 
 ```
 {
@@ -398,13 +344,11 @@ Example body:
 }
 ```
 
----
-
-## Get conversation messages
+### Get messages
 
 GET `/conversations/{id}/messages`
 
-Returns message history.
+Returns conversation history.
 
 ---
 
@@ -421,29 +365,22 @@ MessageService-->>API: messageId
 API-->>Client: response
 ```
 
-Steps:
-
-1. Client sends a request
-2. API validates input
-3. MessageService creates message
-4. Message is stored in database
-5. Response returned to client
-
 ---
 
 # Suggested Project Structure
 
-A simple project structure could look like this:
+Example project layout:
 
 ```
 /models
 /services
 /storage
 /api
+/tests
 /main
 ```
 
-Example:
+Example modules:
 
 ```
 /models
@@ -460,23 +397,28 @@ Example:
 /api
     routes
 
+/tests
+    integrationTest
+
 /main
     application entry point
 ```
 
-The goal is to keep **responsibilities separated**.
-
 ---
 
-# Important Notes
+# Best Practices
 
-This reference architecture intentionally keeps the system **simple**.
-
-Students should focus on:
+Focus on:
 
 - clear code structure
-- correct data modeling
-- working functionality
+- meaningful naming
+- small modules
+- understandable logic
 
-A **small working system** is much better than a large unfinished one.
+Avoid:
 
+- putting all logic in one file
+- extremely long functions
+- copying code without understanding it
+
+A **small working system implemented correctly** is much better than a large unfinished one.
