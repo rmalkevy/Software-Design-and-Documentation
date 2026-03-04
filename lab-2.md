@@ -259,3 +259,224 @@ In professional development:
 Focus on writing **simple, understandable, and well‑structured code**.
 
 A small system implemented correctly is much more valuable than a large system that does not work reliably.
+
+---
+
+# Minimal Reference Architecture — Educational Messenger
+
+This document describes a **minimal reference architecture** for the messenger project used in Laboratory Work 2.
+
+The purpose of this reference is to help students understand **how a simple messenger system can be structured**.  
+It is **not a strict template** — students are free to adapt it according to their variant.
+
+---
+
+# System Overview
+
+The minimal system contains three main parts:
+
+- Client (CLI / simple UI / Postman)
+- Backend API
+- Database
+
+```
+Client -> HTTP API -> Message Service -> Database
+```
+
+The system should support:
+
+- creating users
+- sending messages
+- retrieving message history
+
+---
+
+# Minimal Architecture
+
+```mermaid
+flowchart LR
+
+Client[Client / Postman]
+API[HTTP API]
+Msg[Message Service]
+DB[(Database)]
+
+Client --> API
+API --> Msg
+Msg --> DB
+```
+
+Components:
+
+**Client**
+- command line program
+- Postman
+- simple frontend
+
+**HTTP API**
+- handles incoming requests
+- validates input
+
+**Message Service**
+- contains business logic
+- creates and stores messages
+
+**Database**
+- stores users
+- stores conversations
+- stores messages
+
+SQLite is perfectly acceptable for this project.
+
+---
+
+# Minimal Data Model
+
+## User
+
+```
+User
+----
+id
+name
+```
+
+## Conversation
+
+```
+Conversation
+------------
+id
+type (direct | group)
+```
+
+## Message
+
+```
+Message
+-------
+id
+conversationId
+senderId
+text
+createdAt
+```
+
+This structure is sufficient for a basic messenger.
+
+---
+
+# Minimal API
+
+The following endpoints are recommended.
+
+## Create user
+
+POST `/users`
+
+Example body:
+
+```
+{
+  "name": "Alice"
+}
+```
+
+---
+
+## Send message
+
+POST `/messages`
+
+Example body:
+
+```
+{
+  "conversationId": "1",
+  "senderId": "1",
+  "text": "Hello"
+}
+```
+
+---
+
+## Get conversation messages
+
+GET `/conversations/{id}/messages`
+
+Returns message history.
+
+---
+
+# Example Message Flow
+
+```mermaid
+sequenceDiagram
+
+Client->>API: POST /messages
+API->>MessageService: sendMessage()
+MessageService->>Database: store message
+Database-->>MessageService: OK
+MessageService-->>API: messageId
+API-->>Client: response
+```
+
+Steps:
+
+1. Client sends a request
+2. API validates input
+3. MessageService creates message
+4. Message is stored in database
+5. Response returned to client
+
+---
+
+# Suggested Project Structure
+
+A simple project structure could look like this:
+
+```
+/models
+/services
+/storage
+/api
+/main
+```
+
+Example:
+
+```
+/models
+    user
+    message
+    conversation
+
+/services
+    messageService
+
+/storage
+    database
+
+/api
+    routes
+
+/main
+    application entry point
+```
+
+The goal is to keep **responsibilities separated**.
+
+---
+
+# Important Notes
+
+This reference architecture intentionally keeps the system **simple**.
+
+Students should focus on:
+
+- clear code structure
+- correct data modeling
+- working functionality
+
+A **small working system** is much better than a large unfinished one.
+
